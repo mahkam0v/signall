@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kirish — SIGNAL</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="noise-layer"></div>
+
+<header>
+  <a class="logo" href="index.html">SIGNAL</a>
+  <nav>
+    <a href="index.html" class="nav-link">Bosh sahifaga qaytish</a>
+  </nav>
+</header>
+
+<div class="auth-wrap">
+  <div class="auth-card">
+    <h1>Kirish</h1>
+    <p class="auth-sub">Hisobingizga kiring.</p>
+
+    <p class="auth-error" id="authError"></p>
+
+    <form id="authForm" data-mode="login">
+      <div class="field">
+        <label for="username">Username</label>
+        <input type="text" id="username" name="username" autocomplete="username" required>
+      </div>
+      <div class="field">
+        <label for="password">Parol</label>
+        <input type="password" id="password" name="password" autocomplete="current-password" required>
+      </div>
+      <button type="submit" class="nav-cta auth-submit" id="authSubmit">Kirish</button>
+    </form>
+
+    <p class="auth-switch">Hisobingiz yo'qmi? <a href="register.html">Ro'yxatdan o'ting</a></p>
+  </div>
+</div>
+
+<script type="module" src="js/auth.js"></script>
+</body>
+</html>
