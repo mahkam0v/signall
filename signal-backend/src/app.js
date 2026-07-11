@@ -20,6 +20,11 @@ app.use(express.json());
 const uploadsPath = path.resolve(__dirname, '..', env.UPLOADS_DIR);
 app.use('/uploads', express.static(uploadsPath));
 
+const PORT = process.env.PORT || 4000;
+app.listen(PORT, () =>{
+  console.log(`server muvoffaqyatli ulandi: ${PORT}`);
+});
+
 app.get('/api/health', (req, res) => res.json({ status: 'ok' }));
 
 app.use('/api/auth', authRoutes);
