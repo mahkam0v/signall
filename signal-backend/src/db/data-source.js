@@ -23,3 +23,14 @@ const connectionOptions = env.DATABASE_URL
         rejectUnauthorized: false,
       },
     };
+
+// 👇 MANA SHU QISMI SIZDA YETISHMAYOTGAN EDI:
+export const AppDataSource = new DataSource({
+  type: 'postgres', // TypeORM'ga PostgreSQL ishlatayotganimizni aytamiz
+  ...connectionOptions, // Yuqoridagi ulanish sozlamalarini ulaymiz
+  synchronize: true, // Sahifalar/jadvallar avtomatik yaratilishi uchun (Lokalda qulay)
+  logging: false,
+  entities: [Anime, Channel, User], // Entity modellarini ro'yxatga olamiz
+  migrations: [],
+  subscribers: [],
+});
