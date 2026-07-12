@@ -7,7 +7,7 @@ async function main() {
     await AppDataSource.initialize();
     console.log("🗄️  Ma'lumotlar bazasiga ulanish muvaffaqiyatli.");
   } catch (err) {
-    console.error("❌ Ma'lumotlar bazasiga ulanishda xatolik:", err.message);
+    console.error("❌ Ma'lumotlar bazasiga ulanishda xatolik:", err.message || err);
     process.exit(1);
   }
 
