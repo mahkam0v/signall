@@ -22,5 +22,10 @@ export const AppDataSource = new DataSource({
   synchronize: false,
   logging: false,
   entities: [Anime, Channel, User],
-  // SSL butunlay o'chirildi, Railway ichki tarmog'ida muammosiz ulanadi
+
+  // Dinamik SSL sozlamasi: faqat tashqi (public) aloqa uchun yoqiladi, 
+  // Railway ichki tarmog'ida xato bermaslik uchun avtomatik o'chadi.
+  ssl: env.DATABASE_URL && !env.DATABASE_URL.includes('railway.internal') 
+    ? { rejectUnauthorized: false } 
+    : false,
 });
