@@ -22,11 +22,5 @@ export const AppDataSource = new DataSource({
   synchronize: false,
   logging: false,
   entities: [Anime, Channel, User],
-
-  // Railway PostgreSQL (public/proxy manzil orqali ulanganda) SSL talab qiladi.
-  // Ichki (internal) manzil orqali ulansa bunga ehtiyoj yo'q, lekin true qoldirish
-  // xavfsiz - internal ulanishda ham xato bermaydi.
-  ssl: env.DATABASE_URL
-  ? { rejectUnauthorized: false }
-  : false,
+  // SSL butunlay o'chirildi, Railway ichki tarmog'ida muammosiz ulanadi
 });
