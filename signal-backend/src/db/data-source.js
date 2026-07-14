@@ -62,7 +62,7 @@ export const AppDataSource = new DataSource({
   // Railway PostgreSQL (public/proxy manzil orqali ulanganda) SSL talab qiladi.
   // Ichki (internal) manzil orqali ulansa bunga ehtiyoj yo'q, lekin true qoldirish
   // xavfsiz - internal ulanishda ham xato bermaydi.
-  ssl: env.DATABASE_URL?.includes('railway')
-    ? { rejectUnauthorized: false }
-    : false,
+  ssl: env.DATABASE_URL
+  ? { rejectUnauthorized: false }
+  : false,
 });
