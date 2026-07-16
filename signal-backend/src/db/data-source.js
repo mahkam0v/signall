@@ -29,3 +29,18 @@ export const AppDataSource = new DataSource({
     ? { rejectUnauthorized: false } 
     : false,
 });
+
+export async function connectDatabase() {
+  try {
+    await AppDataSource.initialize();       // 1) avval private (railway.internal)
+    return AppDataSource;
+  } catch (err) {
+    const canFallback = env.DATABASE_URL && env.DATABASE_PUBLIC_URL;
+    if (!canFallback) throw err;
+
+    console.warn("⚠️  Private ulanish muvaffaqiyatsiz, DATABASE_PUBLIC_URL orqali qayta urinilyapti...");
+    AppDataSource = new DataSource(buildOptionsFromUrl(env.DATABASE_PUBLIC_URL)); // 2) fallback
+    await AppDataSource.initialize();
+    return AppDataSource;
+  }
+}
