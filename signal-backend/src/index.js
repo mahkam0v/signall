@@ -1,10 +1,10 @@
-import { AppDataSource } from './db/data-source.js';
+import { connectDatabase } from './db/data-source.js';
 import { app } from './app.js';
 import { env } from './config/env.js';
 
 async function main() {
   try {
-    await AppDataSource.initialize();
+    await connectDatabase();
     console.log("🗄️  Ma'lumotlar bazasiga ulanish muvaffaqiyatli.");
   } catch (err) {
     console.error("❌ Ma'lumotlar bazasiga ulanishda xatolik:", err.message || err);
