@@ -15,15 +15,8 @@ export const app = express();
 app.use(cors());
 app.use(express.json());
 
-// signal-bot yuklagan rasmlar (masalan "/uploads/naruto-123.jpg") shu orqali
-// to'g'ridan-to'g'ri frontendga xizmat qiladi.
 const uploadsPath = path.resolve(__dirname, '..', env.UPLOADS_DIR);
 app.use('/uploads', express.static(uploadsPath));
-
-const PORT = process.env.PORT || 4000;
-app.listen(PORT, () =>{
-  console.log(`server muvoffaqyatli ulandi: ${PORT}`);
-});
 
 app.get('/api/health', (req, res) => res.json({ status: 'ok' }));
 
