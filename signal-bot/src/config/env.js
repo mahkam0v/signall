@@ -11,7 +11,7 @@ function required(name, fallback) {
 module.exports = {
   BOT_TOKEN: required('BOT_TOKEN'),
 
-  DATABASE_URL: process.env.DATABASE_URL || null,
+  DATABASE_PUBLIC_URL: process.env.DATABASE_PUBLIC_URL || null,
   PG: {
     host: process.env.PGHOST || 'localhost',
     port: Number(process.env.PGPORT || 5432),
