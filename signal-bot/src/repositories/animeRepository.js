@@ -1,7 +1,7 @@
-const { AppDataSource } = require('../db/data-source');
-const Anime = require('../db/entities/Anime');
-const Channel = require('../db/entities/Channel');
-const { slugify } = require('../services/postParser');
+import { AppDataSource } from '../db/data-source.js';
+import Anime from '../db/entities/Anime.js';
+import Channel from '../db/entities/Channel.js';
+import { slugify } from '../services/postParser.js';
 
 function animeRepo() {
   return AppDataSource.getRepository(Anime);
@@ -41,7 +41,7 @@ async function upsertAnime({ title, genre, photo, photoUrl }) {
 // Kanal yozuvini qo'shadi/yangilaydi.
 // (eski bug: har safar "Saqlash" bosilganda channels massiviga qayta-qayta bir xil
 // kanal qo'shilaverardi - endi UNIQUE(anime_id, channel, episode) tufayli mavjud
-// yozuv topilib, faqat sifat ma'lumoti yangilanadi, dublikat qo'shilmaydi.)  
+// yozuv topilib, faqat sifat ma'lumoti yangilanadi, dublikat qo'shilmaydi.)
 async function upsertChannel({ animeId, channel, quality, episode }) {
   const repo = channelRepo();
 
@@ -68,13 +68,13 @@ async function upsertChannel({ animeId, channel, quality, episode }) {
   await repo.save(created);
 }
 
-async function saveParsedPost({ title, genre, photo, photoUrl, channel, quality, episode }) {
+export async function saveParsedPost({ title, genre, photo, photoUrl, channel, quality, episode }) {
   const anime = await upsertAnime({ title, genre, photo, photoUrl });
   await upsertChannel({ animeId: anime.id, channel, quality, episode });
   return anime;
 }
 
-async function findBySlug(title) {
+export async function findBySlug(title) {
   const slug = slugify(title);
   const repo = animeRepo();
 
@@ -93,7 +93,7 @@ async function findBySlug(title) {
   return { ...animeFields, channels };
 }
 
-async function listAll() {
+export async function listAll() {
   const repo = animeRepo();
   const rows = await repo.find({
     select: { title: true },
@@ -102,18 +102,9 @@ async function listAll() {
   return rows;
 }
 
-async function deleteBySlug(title) {
+export async function deleteBySlug(title) {
   const slug = slugify(title);
   const repo = animeRepo();
   const result = await repo.delete({ slug });
   return (result.affected || 0) > 0;
 }
-
-module.exports = {
-  upsertAnime,
-  upsertChannel,
-  saveParsedPost,
-  findBySlug,
-  listAll,
-  deleteBySlug,
-};

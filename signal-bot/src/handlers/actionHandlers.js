@@ -1,7 +1,7 @@
-const pendingStore = require('../state/pendingStore');
-const animeRepository = require('../repositories/animeRepository');
-const { downloadPhotoToLocal } = require('../services/imageStorage');
-const { slugify } = require('../services/postParser');
+import pendingStore from '../state/pendingStore.js';
+import * as animeRepository from '../repositories/animeRepository.js';
+import { downloadPhotoToLocal } from '../services/imageStorage.js';
+import { slugify } from '../services/postParser.js';
 
 // Eski koddagi bug: ctx.editMessageReplyMarkup() argumentsiz chaqirilganda,
 // agar xabar allaqachon o'zgartirilgan yoki eskirgan bo'lsa Telegram API xato qaytarib,
@@ -14,7 +14,7 @@ async function safeRemoveKeyboard(ctx) {
   }
 }
 
-function registerActionHandlers(bot) {
+export function registerActionHandlers(bot) {
   bot.action('confirm', async (ctx) => {
     const userId = ctx.from.id;
     const state = pendingStore.get(userId);
@@ -88,5 +88,3 @@ function registerActionHandlers(bot) {
     await ctx.reply('Bekor qilindi, hech narsa saqlanmadi.');
   });
 }
-
-module.exports = { registerActionHandlers };

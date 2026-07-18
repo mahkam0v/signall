@@ -1,9 +1,9 @@
-const pendingStore = require('../state/pendingStore');
-const { parsePost, findMissing } = require('../services/postParser');
-const { previewText } = require('../services/previewService');
-const { confirmKeyboard } = require('../keyboards/confirmKeyboard');
+import pendingStore from '../state/pendingStore.js';
+import { parsePost, findMissing } from '../services/postParser.js';
+import { previewText } from '../services/previewService.js';
+import { confirmKeyboard } from '../keyboards/confirmKeyboard.js';
 
-function registerMessageHandlers(bot) {
+export function registerMessageHandlers(bot) {
   bot.on('text', (ctx) => {
     const text = ctx.message.text;
     if (text.startsWith('/')) return;
@@ -70,5 +70,3 @@ function registerMessageHandlers(bot) {
     });
   });
 }
-
-module.exports = { registerMessageHandlers };

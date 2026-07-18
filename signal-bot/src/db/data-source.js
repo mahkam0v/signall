@@ -1,12 +1,20 @@
-require('reflect-metadata');
-const { DataSource } = require('typeorm');
-const env = require('../config/env');
+import 'reflect-metadata';
+import { DataSource } from 'typeorm';
+import env from '../config/env.js';
 
-const Anime = require('./entities/Anime');
-const Channel = require('./entities/Channel');
+import Anime from './entities/Anime.js';
+import Channel from './entities/Channel.js';
 
+// DATABASE_URL bo'lsa o'shani, bo'lmasa host/port/user/pass/db orqali ulanamiz.
+// Render'ning tashqi (public/external) manzili orqali ulanganda SSL talab
+// qilinadi, shuning uchun "localhost" bo'lmasa SSL yoqiladi.
 const connectionOptions = env.DATABASE_URL
-  ? { url: env.DATABASE_URL }
+  ? {
+      url: env.DATABASE_URL,
+      ssl: env.DATABASE_URL.includes('localhost')
+        ? false
+        : { rejectUnauthorized: false },
+    }
   : {
       host: env.PG.host,
       port: env.PG.port,
@@ -15,12 +23,10 @@ const connectionOptions = env.DATABASE_URL
       database: env.PG.database,
     };
 
-const AppDataSource = new DataSource({
+export const AppDataSource = new DataSource({
   type: 'postgres',
   ...connectionOptions,
   synchronize: false,
   logging: false,
   entities: [Anime, Channel],
 });
-
-module.exports = { AppDataSource };

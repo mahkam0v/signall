@@ -1,9 +1,9 @@
-require('reflect-metadata');
-const { AppDataSource } = require('./data-source');
+import 'reflect-metadata';
+import { AppDataSource } from './data-source.js';
 
-// Eski versiyada schema.sql qo'lda ishga tushirilardi. Endi TypeORM entity'lari
-// (Anime, Channel) sxemani o'zi tavsiflaydi, shuning uchun migratsiya shunchaki
-// DataSource'ni ochib, synchronize() orqali jadvallarni yaratadi/moslashtiradi.
+// TypeORM entity'lari (Anime, Channel) sxemani o'zi tavsiflaydi, shuning uchun
+// migratsiya shunchaki DataSource'ni ochib, synchronize() orqali jadvallarni
+// yaratadi/moslashtiradi.
 async function migrate() {
   try {
     await AppDataSource.initialize();
@@ -13,7 +13,9 @@ async function migrate() {
     console.error('❌ Migratsiya xatoligi:', err.message);
     process.exitCode = 1;
   } finally {
-    await AppDataSource.destroy();
+    if (AppDataSource.isInitialized) {
+      await AppDataSource.destroy();
+    }
   }
 }
 

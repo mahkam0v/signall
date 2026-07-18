@@ -1,8 +1,7 @@
-const { EntitySchema } = require('typeorm');
+import { EntitySchema } from 'typeorm';
 
-// TypeORM decoratorlarsiz (EntitySchema) - loyiha CommonJS bo'lgani uchun
-// bu usul eng qulay va TypeScript/Babel talab qilmaydi.
-module.exports = new EntitySchema({
+// TypeORM decoratorlarsiz (EntitySchema) - eng qulay va TypeScript/Babel talab qilmaydi.
+export default new EntitySchema({
   name: 'Anime',
   tableName: 'anime',
   columns: {

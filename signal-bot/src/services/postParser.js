@@ -1,7 +1,7 @@
 // Anime nomini bazada izchil qidirish/saqlash uchun normalizatsiya qilamiz.
 // Eski koddagi bug: /qidir'da faqat toLowerCase ishlatilgan, lekin ortiqcha bo'shliqlar
 // yoki boshida/oxirida probel bo'lsa ikkita "bir xil" anime alohida yozuv sifatida saqlanardi.
-function slugify(title) {
+export function slugify(title) {
   return title
     .trim()
     .toLowerCase()
@@ -9,7 +9,7 @@ function slugify(title) {
 }
 
 // Kanal postidan ma'lumotlarni ajratib olish
-function parsePost(text) {
+export function parsePost(text) {
   const result = {};
   const firstLine = text.split('\n')[0].trim();
   result.title = firstLine.replace(/[╭─•|#]/g, '').trim();
@@ -30,7 +30,7 @@ function parsePost(text) {
 }
 
 // Barcha kerakli maydon to'lganini tekshiradi, yetishmaganlarni ro'yxat qilib qaytaradi
-function findMissing(parsed, hasPhoto) {
+export function findMissing(parsed, hasPhoto) {
   const missing = [];
   if (!parsed.title) missing.push('Nomi');
   if (!parsed.episode) missing.push('Qism raqami (masalan "Qism: 1")');
@@ -40,5 +40,3 @@ function findMissing(parsed, hasPhoto) {
   if (!hasPhoto) missing.push('Rasm (post rasm bilan yuborilishi kerak)');
   return missing;
 }
-
-module.exports = { slugify, parsePost, findMissing };

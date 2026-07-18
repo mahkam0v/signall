@@ -2,7 +2,7 @@
 // eslab turadi. key: userId, value: { parsed, photo, waitingForTitle }
 const pending = new Map();
 
-module.exports = {
+export default {
   get: (userId) => pending.get(userId),
   set: (userId, state) => pending.set(userId, state),
   delete: (userId) => pending.delete(userId),

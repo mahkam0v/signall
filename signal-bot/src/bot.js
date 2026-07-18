@@ -1,9 +1,9 @@
-const { Telegraf } = require('telegraf');
-const env = require('./config/env');
+import { Telegraf } from 'telegraf';
+import env from './config/env.js';
 
-const { registerCommandHandlers } = require('./handlers/commandHandlers');
-const { registerMessageHandlers } = require('./handlers/messageHandlers');
-const { registerActionHandlers } = require('./handlers/actionHandlers');
+import { registerCommandHandlers } from './handlers/commandHandlers.js';
+import { registerMessageHandlers } from './handlers/messageHandlers.js';
+import { registerActionHandlers } from './handlers/actionHandlers.js';
 
 const bot = new Telegraf(env.BOT_TOKEN);
 
@@ -16,4 +16,4 @@ bot.catch((err, ctx) => {
   console.error(`Kutilmagan xatolik (update ${ctx.updateType}):`, err);
 });
 
-module.exports = bot;
+export default bot;

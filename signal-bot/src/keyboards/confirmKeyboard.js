@@ -1,9 +1,7 @@
-const { Markup } = require('telegraf');
+import { Markup } from 'telegraf';
 
-const confirmKeyboard = Markup.inlineKeyboard([
+export const confirmKeyboard = Markup.inlineKeyboard([
   [Markup.button.callback('✅ Saqlash', 'confirm')],
   [Markup.button.callback("✏️ Nomini o'zgartirish", 'edit_title')],
   [Markup.button.callback('❌ Bekor qilish', 'cancel')],
 ]);
-
-module.exports = { confirmKeyboard };

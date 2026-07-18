@@ -1,13 +1,13 @@
-require('reflect-metadata');
-const { AppDataSource } = require('./db/data-source');
-const bot = require('./bot');
+import 'reflect-metadata';
+import { AppDataSource } from './db/data-source.js';
+import bot from './bot.js';
 
 async function main() {
   try {
     await AppDataSource.initialize();
-    console.log('🗄️  Ma\'lumotlar bazasiga ulanish muvaffaqiyatli.');
+    console.log("🗄️  Ma'lumotlar bazasiga ulanish muvaffaqiyatli.");
   } catch (err) {
-    console.error('❌ Ma\'lumotlar bazasiga ulanishda xatolik:', err.message);
+    console.error("❌ Ma'lumotlar bazasiga ulanishda xatolik:", err.message);
     process.exit(1);
   }
 

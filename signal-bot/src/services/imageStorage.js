@@ -1,9 +1,12 @@
-const fs = require('fs');
-const path = require('path');
-const https = require('https');
+import fs from 'fs';
+import path from 'path';
+import https from 'https';
+import { fileURLToPath } from 'url';
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 // Barcha yuklab olingan rasmlar shu papkaga tushadi (loyihaning tub papkasida /uploads).
-const UPLOAD_DIR = path.join(__dirname, '..', '..', 'uploads');
+export const UPLOAD_DIR = path.join(__dirname, '..', '..', 'uploads');
 
 if (!fs.existsSync(UPLOAD_DIR)) {
   fs.mkdirSync(UPLOAD_DIR, { recursive: true });
@@ -14,7 +17,7 @@ if (!fs.existsSync(UPLOAD_DIR)) {
 // Shuning uchun bu funksiya file_id orqali HAQIQIY rasm baytlarini yuklab olib,
 // serverning /uploads papkasiga saqlaydi va oddiy fayl nomini qaytaradi -
 // shu nomni saytda "/uploads/<fileName>" ko'rinishida to'g'ridan-to'g'ri ishlatish mumkin.
-async function downloadPhotoToLocal(telegram, fileId, slug) {
+export async function downloadPhotoToLocal(telegram, fileId, slug) {
   const fileLink = await telegram.getFileLink(fileId);
   const href = typeof fileLink === 'string' ? fileLink : fileLink.href;
 
@@ -41,5 +44,3 @@ async function downloadPhotoToLocal(telegram, fileId, slug) {
 
   return fileName;
 }
-
-module.exports = { downloadPhotoToLocal, UPLOAD_DIR };

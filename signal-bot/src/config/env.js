@@ -1,4 +1,5 @@
-require('dotenv').config();
+import dotenv from 'dotenv';
+dotenv.config();
 
 function required(name, fallback) {
   const value = process.env[name] ?? fallback;
@@ -8,10 +9,10 @@ function required(name, fallback) {
   return value;
 }
 
-module.exports = {
+export default {
   BOT_TOKEN: required('BOT_TOKEN'),
 
-  DATABASE_PUBLIC_URL: process.env.DATABASE_PUBLIC_URL || null,
+  DATABASE_URL: process.env.DATABASE_URL || null,
   PG: {
     host: process.env.PGHOST || 'localhost',
     port: Number(process.env.PGPORT || 5432),

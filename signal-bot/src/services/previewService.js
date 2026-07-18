@@ -1,4 +1,4 @@
-function previewText(parsed, photoStatus) {
+export function previewText(parsed, photoStatus) {
   return (
     `📋 Tekshiring:\n\n` +
     `Nomi: ${parsed.title || "❌ topilmadi"}\n` +
@@ -10,5 +10,3 @@ function previewText(parsed, photoStatus) {
     `To'g'rimi?`
   );
 }
-
-module.exports = { previewText };

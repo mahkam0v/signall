@@ -1,6 +1,6 @@
-const animeRepository = require('../repositories/animeRepository');
+import * as animeRepository from '../repositories/animeRepository.js';
 
-function registerCommandHandlers(bot) {
+export function registerCommandHandlers(bot) {
   bot.start((ctx) => {
     ctx.reply(
       'Salom! Men anime qidiruv botiman.\n\n' +
@@ -64,5 +64,3 @@ function registerCommandHandlers(bot) {
     }
   });
 }
-
-module.exports = { registerCommandHandlers };
