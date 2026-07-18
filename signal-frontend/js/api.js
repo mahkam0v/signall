@@ -1,6 +1,6 @@
 // Backend qayerda ishlayotgan bo'lsa, shu manzilni ko'rsat.
-export const API_BASE_URL = 'http://localhost:4000/api';
-export const ASSET_BASE_URL = 'http://localhost:4000';
+export const API_BASE_URL = 'https://signall-8mga.onrender.com/api';
+export const ASSET_BASE_URL = 'https://signall-8mga.onrender.com';
 
 const TOKEN_KEY = 'signal_token';
 
